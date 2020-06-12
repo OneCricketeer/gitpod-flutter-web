@@ -13,11 +13,11 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
 WORKDIR /home/gitpod
 USER gitpod
 
+ENV PATH="/home/gitpod/flutter/bin:$PATH"
+
 RUN git clone https://github.com/flutter/flutter -b stable --depth=1 && \
-    /home/gitpod/flutter/bin/flutter channel dev && \
-    /home/gitpod/flutter/bin/flutter upgrade && \
-    /home/gitpod/flutter/bin/flutter config --enable-web && \
-    /home/gitpod/flutter/bin/flutter --version
+    flutter upgrade && \
+    flutter --version && \
+    flutter config --enable-web
 
 ENV PUB_CACHE=/workspace/.pub_cache
-ENV PATH="/home/gitpod/flutter/bin:$PATH"
