@@ -13,7 +13,8 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
 WORKDIR /home/gitpod
 USER gitpod
 
-ENV PATH="/home/gitpod/flutter/bin:$PATH"
+ENV FLUTTER_HOME=/home/gitpod/flutter \
+    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$PATH
 
 RUN git clone https://github.com/flutter/flutter -b stable --depth=1 && \
     flutter upgrade && \
